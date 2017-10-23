@@ -103,7 +103,21 @@ def main():
         model.fit(input_fn=train_input_fn, steps=2000)
 
         # Evaluate accuracy
+        print('[Evaluate]')
         print(model.evaluate(input_fn=test_input_fn))
+
+        # Predict
+        new_samples = np.array(
+            [[6.4, 3.2, 4.5, 1.5],
+             [5.8, 3.1, 5.0, 1.7]], dtype=np.float32)
+        predict_input_fn = tf.estimator.inputs.numpy_input_fn(
+            x={"x": new_samples},
+            num_epochs=1,
+            shuffle=False)
+
+        preds = list(model.predict_classes(input_fn=predict_input_fn))
+        print('\n[Predict]')
+        print(preds)
 
 
 if __name__ == '__main__':
