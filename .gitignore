@@ -5,3 +5,6 @@
 # Python 
 *.pyc
 *.py~
+
+# Dataset
+_dataset
